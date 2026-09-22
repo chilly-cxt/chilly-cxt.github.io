@@ -1,363 +1,46 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>《红楼梦》讲解视频 · 展示</title>
-<样式>
- :root {
-    --bg：#0c0e13；--panel：#151922；--panel-2：#1b202c；--line：#2a3140；
-    --text: #ece9e2; --muted: #9aa3b2; --accent: #d4a24e; --accent-2: #b03a2e;
-    --radius: 14px;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; scroll-padding-top: 74px; }
-  body { background: var(--bg); color: var(--text);
-    字体族: “微软雅黑”, “苹方”, 、“思源黑体”, 无衬线字体; 行高: 1.6; }
-  .包裹 { 最大宽度: 1180像素; 外边距: 0 自动; 内边距: 0 24像素; }
-
-  /* 导航 */
-  nav { position: sticky; top: 0; z-index: 40; background: rgba(12,14,19,.88);
-    backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
-  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
-  nav .logo { 字体粗细: 700; 字距: 1px; 字体大小: 15px; }
-  nav .logo b { color: var(--accent); }
-  nav .links { display: flex; gap: 4px; flex-wrap: wrap; }
- nav .links a { color: var(--muted); text-decoration: none; font-size: 13.5px;
-    内边距: 6px 12px; 圆角半径: 8px; 过渡: 所有属性 .2秒 缓动; }
- nav .links a:hover { color: var(--text); background: var(--panel-2); }
-
-  头部 { 下边框: 1px 实线 var(--line);
-    背景: 线性渐变(180度, #12151d 0%, 变量(--bg) 100%);
-    内边距: 44像素 0 36像素; 文本对齐: 居中; }
-  .踢球者 { 显示: 行内块; 字体大小: 13px; 字距: 6px; 颜色: 变量(--accent);
-    边框: 1px 实线 rgba(212,162,78,.45); border-radius: 999px; padding: 4px 18px; margin-bottom: 18px; }
-  h1 { font-size: 40px; font-weight: 700; letter-spacing: 2px; }
-  h1 .book { color: var(--accent); }
-  .子 { 颜色: 变量(--muted); 上边距: 10px; 字体大小: 15px; }
-  .统计 { 显示: 弹性布局; 间距: 14像素; 对齐内容: 居中; 换行: 自动; 上边距: 22像素; }
-  .状态 { 背景: 变量(--面板); 边框: 1像素 实线 变量(--线条); 圆角: 10像素;
-    padding: 8px 18px; font-size: 13.5px; color: var(--muted); }
-  .stat b { color: var(--text); font-size: 15px; margin-right: 6px; }
-
-  .section-title { display: flex; align-items: center; gap: 14px; margin: 46px 0 20px; }
-  .section-title h2 { font-size: 22px; letter-spacing: 1px; white-space: nowrap; }
-  .section-title .rule { flex: 1; height: 1px; background: var(--line); }
-  .section-title .tag { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
-
-  /* 成片 Hero */
-  .hero { display: grid; grid-template-columns: 360px 1fr; gap: 26px;
-    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
-    padding: 22px; align-items: center; }
-  .hero-poster { width: 100%; aspect-ratio: 9/16; object-fit: cover; border-radius: 10px;
-    border: 1px solid var(--line); cursor: pointer; transition: transform .25s ease; }
-  .hero-poster:hover { transform: scale(1.02); }
- .hero-info video { width: 100%; max-width: 640px; margin-top: 18px;
-    border-radius: 10px; border: 1px solid var(--line); background: #000; }
-  .hero-info h3 { font-size: 24px; margin-bottom: 8px; }
-  .hero-info h3 span { color: var(--accent); }
-  .hero-info p { color: var(--muted); font-size: 14.5px; max-width: 560px; }
-  .pill { display: inline-block; font-size: 12px; color: var(--accent);
-    边框：1px 实线 rgba(212,162,78,.4)；圆角：999px；
-    内边距：2px 12px；下边距：12px；字间距：2px；}
-
-  /* 分镜卡片 */
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px; }
-  .card { position: relative; background: var(--panel-2); border: 1px solid var(--line);
-    border-radius: var(--radius); overflow: hidden; cursor: pointer;
-    transition: transform .22s ease, border-color .22s ease; }
-  .card:hover { transform: translateY(-4px); border-color: rgba(212,162,78,.55); }
-  .card img { width: 100%; aspect-ratio: 9/16; object-fit: cover; display: block;
-    filter: brightness(.88) saturate(.95); transition: filter .25s ease; }
-  .card:hover img { filter: brightness(1) saturate(1.05); }
-  .card .num { position: absolute; top: 12px; left: 12px; font-size: 12px; font-weight: 700;
-    letter-spacing: 1px; background: rgba(12,14,19,.72); color: var(--accent);
-    border: 1px solid rgba(212,162,78,.35); border-radius: 6px; padding: 3px 10px; }
-  .card .meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 34px 14px 12px;
-    background: linear-gradient(180deg, transparent 0%, rgba(10,12,16,.92) 70%); }
-  .card .meta h4 { font-size: 15.5px; letter-spacing: 1px; }
-  .card .meta h4 em { font-style: normal; color: var(--accent); }
-  .card .meta p { font-size: 12px; color: #c4cbd6; margin-top: 3px;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-  .card .chips { position: absolute; top: 44px; left: 12px; right: 12px;
-    display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
-  .chip { 字体大小：11px；颜色：#d8dde6；背景：rgba(12,14,19,.66)；
-边框：1px solid rgba(255,255,255,.14); 圆角：999px；内边距：2px 9px；
-    backdrop-filter: blur(3px); }
- .chip i { 字体样式：正常；颜色：var(--accent)；右边距：4px；}
-  .card .play { position: absolute; top: 40%; left: 50%; transform: translate(-50%,-50%) scale(.85);
- 宽度：58px；高度：58px；边角半径：50%；背景：rgba(12,14,19,0.62)；
- 边框：1.5px solid rgba(236,233,226,.85)；显示方式：flex；对齐方式：center；
-    justify-content: center; opacity: 0; transition: opacity .22s ease, transform .22s ease; }
-  .card:hover .play { opacity: 1; transform: translate(-50%,-50%) scale(1); }
-  .play::after { content: ""; display: block; border-left: 16px solid var(--text);
-    上边框：10px 实线 透明；下边框：10px 实线 透明；左边距：5px； }
-
-  /* 旁白台词 */
-  .narr-list { display: flex; flex-direction: column; gap: 10px; }
-  .narr-row { display: grid; grid-template-columns: 170px 1fr 130px; gap: 16px; align-items: center;
-    background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 13px 18px; }
-  .narr-row:hover { border-color: rgba(212,162,78,.4); }
-  .narr-row .who { font-size: 14px; letter-spacing: 1px; }
-  .narr-row .who b { color: var(--accent); margin-right: 8px; font-size: 13px; }
-  .narr-row .line { font-size: 15px; color: var(--text); }
-  .narr-row .win { font-size: 12px; color: var(--muted); text-align: right;
-    font-variant-numeric: tabular-nums; }
-
-  /* 色彩曲线 */
-  .tone-bar { display: flex; height: 46px; border-radius: 10px; overflow: hidden;
-    border: 1px solid var(--line); margin-top: 16px; }
-  .tone-bar div { flex: 1; display: flex; align-items: center; justify-content: center;
-    font-size: 11.5px; color: rgba(255,255,255,.85); letter-spacing: 1px; }
-  .tone-note { font-size: 12.5px; color: var(--muted); margin-top: 8px; text-align: center; }
-
-  /* 要素 / 要点 卡片 */
-  .spec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-  .spec { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
-  .spec h5 { font-size: 13px; color: var(--accent); letter-spacing: 2px; margin-bottom: 6px; }
-  .spec p { font-size: 13.5px; color: #c9d0da; }
-  .spec p b { color: var(--text); }
- .point-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-  .point { position: relative; background: var(--panel-2); border: 1px solid var(--line);
-    border-radius: 12px; padding: 16px 18px 16px 58px; }
-  .point .no { position: absolute; left: 16px; top: 14px; width: 30px; height: 30px;
-    border-radius: 8px; background: rgba(212,162,78,.14); color: var(--accent);
-    边框：1px 实线 rgba(212,162,78,.4); 显示方式：flex; 垂直居中；水平居中;
-    字体粗细：700；字体大小：14px；}
-  .point h5 { font-size: 14.5px; margin-bottom: 4px; }
-  .point p { font-size: 13px; color: var(--muted); }
-
-  /* 制作流程时间轴 */
-  .flow { position: relative; margin-left: 8px; padding-left: 30px; }
-  .flow::before { content: ""; position: absolute; left: 9px; top: 6px; bottom: 6px;
-    width: 2px; background: linear-gradient(180deg, var(--accent), rgba(212,162,78,.15)); }
-  .step { position: relative; margin-bottom: 18px; background: var(--panel);
-    border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; }
-  .step::before { content: ""; position: absolute; left: -27px; top: 20px; width: 12px; height: 12px;
-    border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
-  .step .head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .step .head h5 { font-size: 15.5px; letter-spacing: 1px; }
-  .step .head .idx { color: var(--accent); font-weight: 700; font-size: 13px; }
-  .step p { font-size: 13px; color: var(--muted); margin-top: 5px; }
-  .tagchip { display: inline-block; font-size: 11.5px; border-radius: 999px; padding: 1px 10px;
-    margin-left: auto; }
-  .tagchip.free { color: #7fc98a; border: 1px solid rgba(127,201,138,.4); }
-  .tagchip.cost { color: #e0b45c; border: 1px solid rgba(224,180,92,.4); }
-  .tagchip.tool { color: var(--muted); border: 1px solid var(--line); }
-
-  /* 弹窗 */
-  .modal { position: fixed; inset: 0; z-index: 50; background: rgba(5,6,9,.88);
-    display: none; align-items: center; justify-content: center; padding: 24px; }
-  .modal.open { display: flex; }
-  .modal-box { width: min(420px, 94vw); }
-  .modal-box video { width: 100%; aspect-ratio: 9/16; max-height: 82vh;
-    border-radius: 12px; border: 1px solid var(--line); background: #000; }
-  .modal-title { display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 12px; color: var(--text); }
-  .modal-title h5 { font-size: 17px; letter-spacing: 1px; font-weight: 600; }
-  .modal-close { cursor: pointer; color: var(--muted); font-size: 13px;
-    border: 1px solid var(--line); border-radius: 8px; background: var(--panel); padding: 5px 14px; }
-  .modal-close:hover { color: var(--text); border-color: var(--accent); }
-
-  /* 返回顶部 */
-  #toTop { position: fixed; right: 26px; bottom: 30px; z-index: 45; width: 44px; height: 44px;
-    border-radius: 50%; background: var(--panel-2); color: var(--accent); border: 1px solid var(--line);
-    cursor: pointer; font-size: 18px; display: none; align-items: center; justify-content: center;
-    transition: all .2s ease; }
-  #toTop:hover { border-color: var(--accent); }
-  #toTop.show { display: flex; }
-
-  footer { margin-top: 60px; border-top: 1px solid var(--line); padding: 26px 0 40px;
-    text-align: center; color: var(--muted); font-size: 12.5px; }
-  footer b { color: var(--text); font-weight: 600; }
-
-  @media (max-width: 860px) {
-    .hero { grid-template-columns: 1fr; }
-    .narr-row { grid-template-columns: 1fr; gap: 4px; }
-    .narr-row .win { text-align: left; }
-    nav .links a { padding: 6px 8px; font-size: 12.5px; }
-    h1 { font-size: 30px; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <title>《红楼梦》讲解视频展示</title>
+    <style>
+        主体 {
+            背景颜色: #0c0e13;
+            颜色: #ffffff;
+            文本对齐: 居中;
+            顶部内边距: 50px;
+            字体族: "微软雅黑", 无衬线字体;
+        }
+        h1 { 颜色: #d4a24e; }
+        .video-container {
+            上边距: 30px;
+            背景颜色: #151922;
+            内边距: 20px;
+            border-radius: 14px;
+            display: inline-block;
+            max-width: 800px;
+            宽度: 90%;
+        }
+        视频 {
+            宽度: 100%;
+            最大宽度: 600px;
+            border-radius: 10px;
+            background-color: #000000;
+            border: 1px solid #2a3140;
+        }
+    </样式>
 </head>
 <body>
 
-<nav><div class="wrap">
-  <div class="logo"><b>《红楼梦》</b>讲解视频</div>
-  <div class="links">
-    <a href="#final">成片</a><a href="#seg">分镜</a><a href="#narr">旁白</a>
-    <a href="#spec">元素</a><a href="#points">要点</a><a href="#flow">流程</a>
-  </div>
-</div></nav>
-
-<header>
-  <div class="wrap">
-    <div class="kicker">名著讲解 · 视频系列</div>
-    <h1><span class="book">《红楼梦》</span>讲解视频</h1>
-    <div class="sub">一梦红楼，起于顽石，终于白茫茫大地 —— 八段画面，讲尽三百年繁华与幻灭</div>
-    <div class="stats">
-      <div class="stat"><b>8</b>段分镜素材</div>
-      <div class="stat"><b>8×5s</b>图生视频</div>
-      <div class="stat"><b>1080×1920</b>竖版 9:16</div>
-      <div class="stat"><b>叠化 0.5s</b>段间转场</div>
-      <div class="stat"><b>纪录片男声</b>旁白配音</div>
+    <h1>《红楼梦》讲解视频</h1>
+    <p>作业提交：视频与网页整合</p >
+    
+    <div class="video-container">
+        <video controls>
+            <source src="讲解.mp4" type="video/mp4">
+            您的浏览器不支持视频播放。
+        </视频>
     </div>
-  </div>
-</header>
 
-<主类="包装">
-
-  <div class="section-title" id="final"><h2>完整成片</h2><div class="rule"></div><div class="tag">拼接 · 叠化转场 · 标题字幕 · 配音</div></div>
-  <div class="hero">
-    <img class="hero-poster" src="images/04_青春_黛玉葬花.png" alt="成片封面" data-video="videos/红楼梦讲解_竖版40秒_配音版.mp4">
-    <div class="hero-info">
-      <span class="pill">最终剪辑</span>
-      <h3>《红楼梦》讲解 <span>·</span> 竖版配音成片</h3>
-      <p>一梦红楼，起于顽石，终于白茫茫大地 —— 八段画面，讲尽三百年繁华与幻灭</p>
-      <video controls preload="metadata" src="videos/红楼梦讲解_竖版40秒_配音版.mp4" poster="images/04_青春_黛玉葬花.png"></video>
-    </div>
-  </div>
-
-  <div class="section-title" id="seg"><h2>分镜片段</h2><div class="rule"></div><div class="tag">点击卡片播放 · 角标为运镜与动效</div></div>
-  <div class="grid" id="grid"></div>
-
-  <div class="section-title" id="narr"><h2>旁白台词</h2><div class="rule"></div><div class="tag">每段一句钩子句 · 卡 5 秒画面窗</div></div>
-  <div class="narr-list" id="narrlist"></div>
-
-  <div class="section-title" id="spec"><h2>视频要素</h2><div class="rule"></div><div class="tag">这条片子是怎么构成的</div></div>
-  <div class="spec-grid">
-    <div class="spec"><h5>片 名</h5><p><b>《红楼梦》讲解视频</b> · 竖版 40 秒配音版（另备 8–10 分钟完整剧本）</p></div>
-    <div class="spec"><h5>结 构</h5><p>开场钩子 + <b>8 段「起—盛—衰—空」</b>+ 收束，段序即叙事弧线</p></div>
-    <div class="spec"><h5>画面</h5><p>AI 生图 8 张（1536×1024）→ <b>9:16 模糊填充</b>转 1080×1920，不裁切内容</p></div>
-    <div class="spec"><h5>动 效</h5><p>只有<b>环境元素动</b>（光/雪/雾/水/烟），人物只做微动作，避免 AI 崩脸</p></div>
-    <div class="spec"><h5>运 镜</h5><p>以<b>固定机位 + 极缓推近</b>为主；收场段唯一升空拉远，用大远景收束</p></div>
-    <div class="spec"><h5>转 场</h5><p>段间<b>叠化 0.5s</b>，每段拉长至 5.5s，节奏「慢起—渐紧—收空」</p></div>
-    <div class="spec"><h5>字 幕</h5><p>段落标题<b>烧录</b>于顶部模糊带：微软雅黑加粗 · 白字黑边 · 段内 0.25s 淡入时窗</p></div>
-    <div class="spec"><h5>旁 白</h5><p>每段一句 13–20 字钩子句；<b>纪录片腔男声</b>（云健），语速 −4%，逐段对齐</p></div>
-    <div class="spec"><h5>混 音</h5><p>纯人声轨 AAC 192k / 48kHz，<b>尾段 1.0s 淡出</b>，画面同步 0.9s 淡出</p></div>
-    <div class="spec"><h5>出 帧</h5><p>H.264 · CRF 20 · 30fps · yuv420p · +faststart（流媒体友好）</p></div>
-  </div>
-
-  <div class="tone-bar">
-    <div style="background:#3a2a1c">01 缘起·晨</div>
-    <div style="background:#4a2e1c">02 聚首·暖</div>
-    <div style="background:#54301e">03 极盛·烈</div>
-    <div style="background:#4c3a4a">04 青春·粉</div>
-    <div style="background:#33313c">05 相知·昏</div>
-    <div style="background:#232631">06 风波·暗</div>
-    <div style="background:#181b25">07 崩解·寒</div>
-    <div style="background:#e8ecef;color:#333">08 收场·白</div>
-  </div>
-  <div class="tone-note">色彩情绪曲线：暖金开场 → 逐段转冷 → 白茫茫收束（与「起—盛—衰—空」同构）</div>
-
-  <div class="section-title" id="points"><h2>生成要点</h2><div class="rule"></div><div class="tag">来自 historical-figure-video-pipeline 技能</div></div>
-  <div class="point-grid">
-    <div class="point"><span class="no">1</span><h5>「起—盛—衰—空」八段骨架</h5><p>开场钩子 + 8 个内容段 + 收束；前三段推高，中段情感高点，后三段落跌，尾段收空。</p></div>
-    <div class="point"><span class="no">2</span><h5>一段一图 · 静态单瞬间</h5><p>每段只画一个瞬间；描述含五要素：环境时间 → 年龄服饰 → 动作神态 → 光线氛围 → 道具细节。</p></div>
-    <div class="point"><span class="no">3</span><h5>风格后缀逐字加</h5><p>每条生图提示词末尾固定接「真实古代纪录片风格」，统一全片质感。</p></div>
-    <div class="point"><span class="no">4</span><h5>负面提示词护航</h5><p>防眼镜/拉链/霓虹等现代元素，防 AI 乱码文字，防多余肢体与面部变形。</p></div>
-    <div class="point"><span class="no">5</span><h5>图生视频铁律</h5><p>只有环境动、人物微动作、运镜压到最弱；群像一律固定机位。</p></div>
-    <div class="point"><span class="no">6</span><h5>模糊填充不裁切</h5><p>横版转竖版不裁画面：上下模糊带正好承载标题字幕，是竖版视频常规做法。</p></div>
-    <div class="point"><span class="no">7</span><h5>配音卡点自动提速</h5><p>旁白超 4.6s 自动 atempo 提速（上限 1.3×），保证逐段对齐不越窗。</p></div>
-    <div class="point"><span class="no">8</span><h5>成片三验清单</h5><p>抽帧验字幕（防方框）· 音轨验人声 · 数量序号一致性核对，全过才交付。</p></div>
-  </div>
-
-  <div class="section-title" id="flow"><h2>完整制作流程</h2><div class="rule"></div><div class="tag">historical-figure-video-pipeline · 8 步</div></div>
-  <div class="flow">
-    <div class="step"><div class="head"><span class="idx">①</span><h5>剧本 · 八段切分</h5><span class="tagchip tool">01_剧本.md</span><span class="tagchip free">免费</span></div>
-      <p>确定作者与版本依据；按「起盛衰空」写开场钩子 + 8 段旁白（各 120–150 字）+ 回目参考 + 画面提示；同步产出 40 秒版钩子句配音稿。</p></div>
-    <div class="step"><div class="head"><span class="idx">②</span><h5>画面描述 · 生图提示词</h5><span class="tagchip tool">02_画面描述.md</span><span class="tagchip free">免费</span></div>
-      <p>每段一条静态单瞬间描述（130–180 字，五要素），末尾逐字加「真实古代纪录片风格」，附镜头建议与可直接复制的纯提示词清单。</p></div>
-    <div 类="step"><div 类="head"><span 类="idx">③</span><h5>AI 生图 ×8</h5><span 类="tagchip 工具">图片\横版原图</span><span 类="tagchip 费用">约 5–10 积分/张</span></div>
-      <p>横版 1536×1024 出图，逐个改序号名并逐张自查内容与年代感，规避现代元素与乱码文字。</p></div>
-    <div class="step"><div class="head"><span class="idx">④</span><h5>横转竖 · 9:16</h5><span class="tagchip tool">to_9x16.py</span><span class=“tagchip 免费”>免费</span></div>
-      <p>模糊填充法：原图等比居中，上下同图模糊压暗铺满，1080×1920，不裁切任何内容。</p></div>
-    <div class="step"><div class="head"><span class="idx">⑤</span><h5>图生视频 ×8</h5><span class="tagchip tool">03_视频提示词.md</span><span class="tagchip cost">约 50–100 积分/条</span></div>
-      <p>底图为竖版图，1080P/5s/无音频；提示词只写环境动 + 人物微动作 + 弱运镜；小批并行提交，超时即重跑。</p></div>
-    <div class="step"><div class="head"><span class="idx">⑥</span><h5>TTS 配音</h5><span class="tagchip tool">gen_tts.py</span><span class="tagchip free">免费</span></div>
-      <p>edge-tts 云健男声、语速 −4%，逐段生成钩子句 mp3，存入 成片\配音\。</p></div>
-    <div class="step"><div class="head"><span class="idx">⑦</span><h5>合成成片</h5><span class="tagchip tool">compose_final.py</span><span class="tagchip free">免费</span></div>
-      <p>ffmpeg：每段拉长 5.5s → 叠化 0.5s → 烧录标题字幕 → 旁白对齐（超长自动提速）→ 尾段淡出；产出后抽帧验字幕、验音轨。</p></div>
-    <div class="step"><div class="head"><span class="idx">⑧</span><h5>展示网页 · 交付</h5><span class="tagchip tool">gen_showcase.py</span><span class="tagchip free">免费</span></div>
-      <p>自包含展示页：成片 Hero + 分镜卡片墙 + 旁白台词 + 视频要素 + 生成要点 + 流程说明，离线双击可开。</p></div>
-  </div>
-
-</主>
-
-<div class="modal" id="modal"><div class="modal-box">
-  <div class="modal-title"><h5 id="modal-title"></h5><span class="modal-close" id="modal-close">关闭 ✕</span></div>
-  <video id="modal-video" controls autoplay></video>
-</div></div>
-
-<button id="toTop" title="返回顶部">↑</button>
-
-<页脚><div 类="wrap">
-  <b>《红楼梦》讲解视频</b> · 由 historical-figure-video-pipeline 技能流水线生成<br>
-  AI 生图 → 9:16 模糊填充 → 图生视频 → edge-tts 配音 → ffmpeg 合成 → 展示网页 · 本页自包含，离线可开
-</div></页脚>
-
-<脚本>
-  var SEGS = { n: "01", name: "缘起 · 青埂峰顽石", desc: "山雾流动，道人拄杖凝望巨石，晨光斜照石面水珠。", narr: "一块顽石思凡下界，一段还泪之约，就此开启。", camera: "固定机位 · 极缓推近", motion: "山雾流动 · 露水反光", img: "images/01_缘起_青埂峰顽石.png", vid: "讲解.mp4" },
-  { n: "02", name: "聚首 · 黛玉进贾府", desc: "暖黄灯笼光下，素衣少女低头入府，廊下少年回头。", narr: "黛玉初进贾府，宝黛相会，金玉良缘悄然而至。", camera: "缓慢横移 · 跟随", motion: "烛火摇曳 · 衣袖轻摆", img: "images/02_聚首_黛玉进贾府.png", vid: "讲解.mp4" },
-  { n: "03", name: "极盛 · 元妃省亲", desc: "夜雪飘落，八抬大轿停定，宫装女子抬眼望向门庭。", narr: "元妃省亲，大观园落成，贾府繁华达到顶点。", camera: "固定机位 · 极缓推近", motion: "夜雪飘落 · 灯笼烛火", img: "images/03_极盛_元妃省亲.png", vid: "讲解.mp4" },
-  { n: "04", name: "青春 · 黛玉葬花", desc: "桃花纷飞，落瓣漂水，少女持花锄立于春溪边。", narr: "园中青春正好，黛玉葬花，吟出满腹心事。", camera: "缓慢下摇 · 轻推", motion: "桃花纷飞 · 落瓣漂水", img: "images/04_青春_黛玉葬花.png", vid: "讲解.mp4" },
-  { n: "05", name: "相知 · 病榻你放心", desc: "油灯跳影，纱帐起伏，少女俯身探视病榻少年。", narr: "宝玉挨打，一句你放心，胜过千言万语。", camera: "极缓推近", motion: "灯火跳动 · 纱帐起伏", img: "images/05_相知_病榻你放心.png", vid: "讲解.mp4" },
-  { n: "06", name: "风波 · 抄检大观园", desc: "提灯队伍穿过月洞门，残灯明灭，箱笼翻乱。", narr: "抄检大观园，晴雯屈死，繁华之下暗流决堤。", camera: "跟随移动", motion: "提灯行进 · 残灯明灭", img: "images/06_风波_抄检大观园.png", vid: "讲解.mp4" },
-  { n: "07", name: "崩解 · 泪尽而逝", desc: "竹影摇窗，青烟盘旋，指间诗稿缓缓滑落。", narr: "贾府被抄，黛玉泪尽而逝，大厦轰然倾塌。", camera: "极缓推近 · 近静止", motion: "竹影摇窗 · 青烟盘旋", img: "images/07_崩解_泪尽而逝.png", vid: "讲解.mp4" },
-  { n: "08", name: "收场 · 白茫茫大地真干净", desc: "升空拉远，红斗篷走向雪原深处，唯一的高饱和色。", narr: "宝玉出走，白茫茫大地，真干净。", camera: "升空拉远 · 全片唯一大运镜", motion: "雪粒飞扬 · 斗篷摆动", img: "images/08_收场_白茫茫大地真干净.png", vid: "讲解.mp4" };
-  var grid = document.getElementById("grid");
-  SEGS.forEach(function (s) {
-    var card = document.createElement("div");
-    card.className = "card";
-    var parts = s.name.split(" · ");
-    var nameHtml = parts.length > 1 ? parts[0] + ' <em>·</em> ' + parts[1] : s.name;
-    card.innerHTML = '<img loading="lazy" src="' + s.img + '" alt="' + s.name + '">'
-      + '<span class="num">' + s.n + '</span>'
-      + '<div class="chips"><span class="chip"><i>运镜</i>' + s.camera + '</span>'
-      + '<span class="chip"><i>动效</i>' + s.motion + '</span></div>'
-      + '<div 类="play"></div>'
-      + '<div class="meta"><h4>' + nameHtml + '</h4><p>' + s.desc + '</p></div>';
-    card.addEventListener("click", function () { openModal(s); });
-    grid.appendChild(card);
-  });
-
-  var nl = document.getElementById("narrlist");
-  SEGS.forEach(function (s, i) {
-    var row = document.createElement("div");
-    row.className = "narr-row";
-    var parts = s.name.split(" · ");
-    var nameHtml = parts.length > 1 ? parts[0] + ' · ' + parts[1] : s.name;
-    var st = (i * 5); var en = (i * 5 + 5);
-    row.innerHTML = '<div class="who"><b>' + s.n + '</b>' + nameHtml + '</div>'
-      + '<div class="line">「' + s.narr + '」</div>'
-      + '<div class="win">00:' + (st < 10 ? "0" + st : st) + ' → 00:' + (en < 10 ? "0" + en : en) + '</div>';
-    nl.appendChild(row);
-  });
-
-  var modal = document.getElementById("modal");
-  var modalVideo = document.getElementById("modal-video");
-  var modalTitle = document.getElementById("modal-title");
-  function openModal(s) {
-    modalTitle.textContent = s.name;
-    modalVideo.src = s.vid;
-    modal.classList.add("open");
-  }
-  function closeModal() {
-    modal.classList.remove("open");
-    modalVideo.pause(); modalVideo.src = "";
-  }
-  document.getElementById("modal-close").addEventListener("click", closeModal);
-  modal.addEventListener("click", function (e) { if (e.target === modal) closeModal(); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeModal(); });
-  var hp = document.querySelector(".hero-poster");
-  if (hp) hp.addEventListener("click", function () {
-    openModal({ name: "完整成片 · 配音版", vid: hp.getAttribute("data-video") });
-  });
-  var toTop = document.getElementById("toTop");
-  window.addEventListener("scroll", function () {
-    toTop.classList.toggle("show", window.scrollY > 600);
-  });
-  toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
-</脚本>
 </body>
-</html>
+    </html>
