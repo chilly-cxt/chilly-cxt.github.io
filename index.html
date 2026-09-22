@@ -3,44 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>《红楼梦》讲解视频展示</title>
-    <style>
-        主体 {
-            背景颜色: #0c0e13;
-            颜色: #ffffff;
-            文本对齐: 居中;
-            顶部内边距: 50px;
-            字体族: "微软雅黑", 无衬线字体;
-        }
-        h1 { 颜色: #d4a24e; }
-        .video-container {
-            上边距: 30px;
-            背景颜色: #151922;
-            内边距: 20px;
-            border-radius: 14px;
-            display: inline-block;
-            max-width: 800px;
-            宽度: 90%;
-        }
-        视频 {
-            宽度: 100%;
-            最大宽度: 600px;
-            border-radius: 10px;
-            background-color: #000000;
-            border: 1px solid #2a3140;
-        }
-    </样式>
 </head>
-<body>
+<body style="background-color: #0c0e13; color: white; 文本对齐: 居中; 上边距: 50像素; 字体族: 无衬线字体;">
 
-    <h1>《红楼梦》讲解视频</h1>
-    <p>作业提交：视频与网页整合</p >
+    <h1 style="color: #d4a24e;">《红楼梦》讲解视频展示</h1>
+    <p style="color: #9aa3b2;">作业提交：视频与网页整合</p >
     
-    <div class="video-container">
-        <video controls>
-            <source src="讲解.mp4" type="video/mp4">
-            您的浏览器不支持视频播放。
-        </视频>
+    <br><br>
+    
+    <!-- 这就是你的B站播放器，已经帮你把BV号填好了 -->
+    <div style="display: flex; justify-content: center;">
+        <iframe 
+            src="//player.bilibili.com/player.html?bvid=BV1wfhn6GEbn&page=1" 
+            scrolling="no" 
+            border="0" 
+            frameborder="no" 
+            framespacing="0" 
+            allowfullscreen="true"
+            样式="宽度: 80%; 最大宽度: 800像素; 高度: 450像素; 圆角半径: 10像素;">
+        </iframe>
     </div>
 
 </body>
-    </html>
+</html>
